@@ -16,6 +16,28 @@ var bot = new discord.Client({
    autorun: true
 });
 
+// Dialogue arrays
+
+var insults = [ "Your bad kid",
+                "Your a pee pee poo poo pants",
+                "You fucking donkey",
+                "bro whats that smell??I hope that aint Your smell, because it smells like jun...... ew.....",
+                "Your mother was a hamster and your father smells of elderberries",
+                "Eat my watermark",
+                "I bet you shower naked. YOU SLUT!",
+                "What are you? Some sort of military test gone wrong??",
+                "You are the cum shot your mother shoulda swallowed",
+                "Why tf are you doing ^insult, instead of playing retro, fuqs wrong with chu??",
+                "Just because its october does not mean you can wear your furry suit outside!",
+                "I found the christmas gift Im buying you",
+                "Ima be real with chu chief. I just plain out dont like you",
+                "Whos a little brit across the sea? YOU ARE",
+                "Watch out! I heard the US army was gonna invade your body, because you use so much essential oil shit.",
+                "You are smooth brained",
+                "You use small brain time",
+                "You fall for all them fake reward virus/scam sites"
+                ]
+
 bot.on('ready', function (evt) {
     
     logger.info('Connected');
@@ -121,47 +143,18 @@ return;
 //------------------------------------------------------------------------------------------------------------------
     if (message.content.startsWith(prefix + "insult"))
     {
-        number = 18;
-                var random = Math.floor(Math.random() * (number - 1 + 1)) +1;
-                switch(random){
-                    case 1: 
-                     message.channel.sendMessage ('Your bad kid');
-                    break;
-                    case 2:  message.channel.sendMessage ('Your a pee pee poo poo pants');
-                     break;                
-                    case 3: message.channel.sendMessage ('You fucking donkey');
-                    break;
-                    case 4: message.channel.sendMessage ('bro whats that smell??I hope that aint Your smell, because it smells like jun...... ew.....');
-                    break;
-                    case 5: message.channel.sendMessage ('Your mother was a hamster and your father smells of elderberries');
-                    break;
-                    case 6: message.channel.sendMessage ('Eat my watermark');
-                    break;
-                    case 7: message.channel.sendMessage ('I bet you shower naked. YOU SLUT!');
-                    break;
-                    case 8: message.channel.sendMessage ('What are you? Some sort of military test gone wrong??');
-                    break;
-                    case 9: message.channel.sendMessage ('You are the cum shot your mother shoulda swallowed');
-                    break;
-                    case 10: message.channel.sendMessage ('Why tf are you doing ^insult, instead of playing retro, fuqs wrong with chu??');
-                    break;
-                    case 11: message.channel.sendMessage ('Just because its october does not mean you can wear your furry suit outside!');
-                    break;
-                    case 12: message.channel.sendMessage ('I found the christmas gift Im buying you', {files: [insult.jpg]});
-                    break;
-                    case 13: message.channel.sendMessage ('Ima be real with chu chief. I just plain out dont like you');
-                    break;
-                    case 14: message.channel.sendMessage ('Whos a little brit across the sea? YOU ARE');
-                    break;
-                    case 15: message.channel.sendMessage ('Watch out! I heard the US army was gonna invade your body, because you use so much essential oil shit.');
-                    break;
-                    case 16: message.channel.sendMessage ('You are smooth brained');
-                    break;
-                    case 17: message.channel.sendMessage ('You use small brain time');
-                    break;
-                    case 18: message.channel.sendMessage ('You fall for all them fake reward virus/scam sites');
-                    break;
-                }
+	// choose a random insult
+        var insult = insults[ Math.floor(Math.random() * insults.length) ];
+        message.reply(insult);
+
+        // check for image
+	var regex = /(?:<)(.*)(?:>)/g;
+
+	if (insult.match(regex))
+        {
+            image = regex.exec(insult)[1];
+            message.reply({files: [image]});
+        }
     }
 //-----------------------------------------------------------------------------------------------------------------
     if (message.content.startsWith(prefix + "magic"))
