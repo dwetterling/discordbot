@@ -35,7 +35,7 @@ if(fs.existsSync('stats.json')){
 }
 
 bot.on('message', (message) => {
-//-----------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------
 //Player levels
 if(message.author.id == bot.user.id)
 return;
@@ -72,28 +72,52 @@ return;
     console.log(message.author.username + ' now has ' + userStats.xp)
     console.log(xpToNextLevel + ' xp needed for next level.')
     }
-//------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------Shows list of commands--------------------------------------------------
  if (message.content.startsWith(prefix + "help"))
 {    
-        message.reply(' Try these keywords after' + ' ' +  '^' + ' ' +  '(stats,ping,ifunny,hi,winux,insult,magic,bored,russian,tendies,noods,count)')
+        message.reply(' Try these keywords after' + ' ' +  '^' + ' ' +  '(stats,ping,ifunny,hi,winux,insult,magic,bored,russian,tendies,noods,count)');
+        
         }
-//-------------------------------------------------------------------------------------------------------------------
+//-------------------------------------Secert commands for staff----------------------------------------------------
+if (message.content.startsWith(prefix + "staff")){
+    message.reply('Try these hidden keywords after' + ' ' + '^' + ' ' + '(shame,ban)')
+}
+
+//---------------------------------------------------------------------------------------------------------------
+ 
+//----------------------------------Auto reply to torvic-----------------------------------------------------------
+       if (message.author.id == ('234511563808178196') && message.channel.id ==('414962144195379220')){
+            message.channel.sendMessage( message.author.username + 'Is a BooMER');
+           message.channel.sendMessage({files: ['ifunny.jpg']});
+        }
+
+//--------------------------------------Auto reply to Chknpi--------------------------------------------------------
+       /*  if (message.author.id == ('467654269311647744') && message.channel.id ==('414962144195379220'))
+        {
+           message.channel.sendMessage( message.author.username + 'Is a BooMER');
+        } */
+//--------------------------------------------To test bot working---------------------------------------------------
     if (message.content.startsWith(prefix + "ping"))
     {
         message.channel.sendMessage('Pong');
     }
-//-----------------------------------------------------------------------------------------------------------------
+//-----------------------------------------To shame luna when she forgets-------------------------------------------
+    if (message.content.startsWith(prefix + "shame"))
+    {
+        message.channel.sendMessage('You forgot to do something', {files: ["shame.jpg"] });
+    }
+//---------------------------------------Show player current level and XP------------------------------------------
     if (message.content.startsWith(prefix + "stats")){
         message.reply(' is level ' + userStats.level)
         message.channel.sendMessage(' and has ' + userStats.xp + ' xp')
         message.channel.sendMessage(xpToNextLevel + 'xp Is needed for the next level.')
     }
-//-------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------ifunny tag----------------------------------------------------------
     if (message.content.startsWith(prefix + "ifunny"))
     {
         message.channel.sendMessage({files: ['ifunny.jpg']});
     }
-//------------------------------------------------------------------------------------------------------------------
+//------------------------------------------Bot says hi--------------------------------------------------------
     if (message.content.startsWith(prefix + "hi"))
     {
         number = 6; 
@@ -113,105 +137,66 @@ return;
                     break;
                     }
     }
-//------------------------------------------------------------------------------------------------------------------
+//--------------------------------------Sorry not sorry linux------------------------------------------------------
     if (message.content.startsWith(prefix + "winux"))
     {
             message.channel.sendMessage( "<@" + 196480010637279232 +  ">" + ' ' + 'BOK', {files: ['winux.jpg']});
     }
-//------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------Gotta insult people---------------------------------------------------
     if (message.content.startsWith(prefix + "insult"))
     {
-        number = 18;
-                var random = Math.floor(Math.random() * (number - 1 + 1)) +1;
-                switch(random){
-                    case 1: 
-                     message.channel.sendMessage ('Your bad kid');
-                    break;
-                    case 2:  message.channel.sendMessage ('Your a pee pee poo poo pants');
-                     break;                
-                    case 3: message.channel.sendMessage ('You fucking donkey');
-                    break;
-                    case 4: message.channel.sendMessage ('bro whats that smell??I hope that aint Your smell, because it smells like jun...... ew.....');
-                    break;
-                    case 5: message.channel.sendMessage ('Your mother was a hamster and your father smells of elderberries');
-                    break;
-                    case 6: message.channel.sendMessage ('Eat my watermark');
-                    break;
-                    case 7: message.channel.sendMessage ('I bet you shower naked. YOU SLUT!');
-                    break;
-                    case 8: message.channel.sendMessage ('What are you? Some sort of military test gone wrong??');
-                    break;
-                    case 9: message.channel.sendMessage ('You are the cum shot your mother shoulda swallowed');
-                    break;
-                    case 10: message.channel.sendMessage ('Why tf are you doing ^insult, instead of playing retro, fuqs wrong with chu??');
-                    break;
-                    case 11: message.channel.sendMessage ('Just because its october does not mean you can wear your furry suit outside!');
-                    break;
-                    case 12: message.channel.sendMessage ('I found the christmas gift Im buying you', {files: [insult.jpg]});
-                    break;
-                    case 13: message.channel.sendMessage ('Ima be real with chu chief. I just plain out dont like you');
-                    break;
-                    case 14: message.channel.sendMessage ('Whos a little brit across the sea? YOU ARE');
-                    break;
-                    case 15: message.channel.sendMessage ('Watch out! I heard the US army was gonna invade your body, because you use so much essential oil shit.');
-                    break;
-                    case 16: message.channel.sendMessage ('You are smooth brained');
-                    break;
-                    case 17: message.channel.sendMessage ('You use small brain time');
-                    break;
-                    case 18: message.channel.sendMessage ('You fall for all them fake reward virus/scam sites');
-                    break;
-                }
+        var insults = [ "Your bad kid",
+                "Your a pee pee poo poo pants",
+                "You fucking donkey",
+                "bro whats that smell??I hope that aint Your smell, because it smells like jun...... ew.....",
+                "Your mother was a hamster and your father smells of elderberries",
+                "Eat my watermark",
+                "I bet you shower naked. YOU SLUT!",
+                "What are you? Some sort of military test gone wrong??",
+                "You are the cum shot your mother shoulda swallowed",
+                "Why tf are you doing ^insult, instead of playing retro, fuqs wrong with chu??",
+                "Just because its october does not mean you can wear your furry suit outside!",
+                "You block head lookin ass",
+                "Ima be real with chu chief. I just plain out dont like you",
+                "Whos a little brit across the sea? YOU ARE",
+                "Watch out! I heard the US army was gonna invade your body, because you use so much essential oil shit.",
+                "You are smooth brained",
+                "You use small brain time",
+                "You fall for all them fake reward virus/scam sites"
+                ]
+       
+                var insult = insults[ Math.floor(Math.random() * insults.length) ];
+        message.reply(insult);
     }
-//-----------------------------------------------------------------------------------------------------------------
+//----------------------------------------------ask the magic 8 ball------------------------------------------------
     if (message.content.startsWith(prefix + "magic"))
-    {
-        number = 20;
-               var random = Math.floor(Math.random() * (number - 1 + 1)) +1;
-               switch(random){
-                   case 1: message.channel.sendMessage ('It is certain');
-                   break;
-                   case 2:  message.channel.sendMessage ('It is decidedly so');
-                    break;                
-                   case 3: message.channel.sendMessage ('Without a doubt');
-                   break;
-                   case 4: message.channel.sendMessage ('Yes - definitely');
-                   break;
-                   case 5: message.channel.sendMessage ('You may rely on it');
-                   break;
-                   case 6: message.channel.sendMessage ('As I see it, yes.');
-                   break;
-                   case 7: message.channel.sendMessage ('Most likely');
-                   break;
-                   case 8:  message.channel.sendMessage ('Outlook good');
-                   break;
-                   case 9:  message.channel.sendMessage ('Yes');
-                   break;
-                   case 10: message.channel.sendMessage ('Signs point to yes');
-                   break;
-                   case 11: message.channel.sendMessage ('Reply hazy,try again');
-                   break;
-                   case 12: message.channel.sendMessage ('Ask again later');
-                   break;
-                   case 13:  message.channel.sendMessage ('Better not tell you now');
-                   break;
-                   case 14: message.channel.sendMessage ('Cannot predict now');
-                   break;
-                   case 15: message.channel.sendMessage ('Concentrate and ask again');
-                   break;
-                   case 16: message.channel.sendMessage ('Dont count on it');
-                   break;
-                   case 17: message.channel.sendMessage ('My reply is no');
-                   break;
-                   case 18: message.channel.sendMessage ('My sources say no');
-                   break;
-                   case 19: message.channel.sendMessage ('Outlook not so good');
-                   break;
-                   case 20: message.channel.sendMessage ('Very doubtful');
-                   break;
-               }
+    { 
+        var magics = ['It is certain',
+        'It is decidedly so',
+        'Without a doubt',
+        'Yes - definitely',
+        'You may rely on it',
+        'As I see it, yes.',
+        'Most likely',
+        'Outlook good',
+        'Yes',
+        'Signs point to yes',
+        'Reply hazy,try again',
+        'Ask again later',
+        'Better not tell you now',
+        'Cannot predict now',
+        'Concentrate and ask again',
+        'Dont count on it',
+        'My reply is no',
+        'My sources say no',
+        'Outlook not so good',
+        'Very doubtful'
+    ]
+
+    var magic = magics[ Math.floor(Math.random() * magics.length) ];
+    message.reply(magic);
     }
-//-------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------When you get bored--------------------------------------------------
     if (message.content.startsWith(prefix + "bored"))
     {
         number = 3; 
@@ -225,7 +210,7 @@ return;
             break;
         }
     }
-//-------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------Russian roullete--------------------------------------------------------
     if (message.content.startsWith(prefix + "russian"))
     {
         number = 6; 
@@ -245,12 +230,12 @@ return;
                     break;
          }
     }
-//-------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------Chicken tendies song------------------------------------------------
     if (message.content.startsWith(prefix + "tendies"))
     {
         message.channel.sendMessage('https://www.youtube.com/watch?v=HbvXwJU6BbE')
     }
-//------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------Just some family friendly noods---------------------------------------
     if (message.content.startsWith(prefix + "noods"))
     {
         number = 5; 
@@ -268,12 +253,22 @@ return;
     break;
         }
     }
+//----------------------------------------------A edited Count song----------------------------------------------
     if (message.content.startsWith(prefix + "count"))
     {
         message.channel.sendMessage('https://www.youtube.com/watch?v=6AXPnH0C9UA&t=36s');
     }
 //---------------------------------------------------------------------------------------------------------------
-// Add Shame,secret,jun,ban (ect secret cmds)
+            
+//-------------------------------------------The fake ban----------------------------------------------------------
+if (message.content.startsWith(prefix + "ban")){
+                            //bot.kick ({
+                               // userID: '234511563808178196'
+                           // });
+        message.channel.sendMessage('Alright time to hit that ban hammer', {files: ["ban.jpg"] });
+} 
+//-----------------------------------------------------------------------------------------------------------------
+// secret,jun(ect secret cmds)
 //----------------------------------------------------------------------------------------------------------------
         
 });
