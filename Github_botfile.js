@@ -69,13 +69,14 @@ return;
 
     jsonfile.writeFileSync('stats.json', stats);
 
-    console.log(message.author.username + ' now has ' + userStats.xp)
-    console.log(xpToNextLevel + ' xp needed for next level.')
+   // console.log(message.author.username + ' now has ' + userStats.xp)
+    //console.log(xpToNextLevel + ' xp needed for next level.')
     }
+
 //-------------------------------------------Shows list of commands--------------------------------------------------
  if (message.content.startsWith(prefix + "help"))
 {    
-        message.reply(' Try these keywords after' + ' ' +  '^' + ' ' +  '(stats,ping,ifunny,hi,winux,insult,magic,bored,russian,tendies,noods,count)');
+        message.reply(' Try these keywords after' + ' ' +  '^' + ' ' +  '(stats,ping,ifunny,hi,winux,insult,magic,bored,russian,tendies,noods,count,food,air,machine,boom)');
         
         }
 //-------------------------------------Secert commands for staff----------------------------------------------------
@@ -83,10 +84,34 @@ if (message.content.startsWith(prefix + "staff")){
     message.reply('Try these hidden keywords after' + ' ' + '^' + ' ' + '(shame,ban)')
 }
 
+if (message.content.startsWith(prefix + "food"))
+{
+    var food =['chicken tendies',
+        'pasta',
+        'salad',
+        'burger',
+        'tacos',
+        'pizza',
+        'grilled cheese',
+        'EGG',
+        'PB & J',
+        'chili',
+        'Chicken wrap',
+        'mac n cheese',
+        'nothing..STARVE!!!!'
+    ]
+
+    var eat = food[ Math.floor(Math.random() * food.length) ];
+        message.reply(eat);
+
+}
 //---------------------------------------------------------------------------------------------------------------
- 
+ /* if (message.content.startsWith(prefix + "say"))
+ {
+     message.channel.sendMessage(message.content.;
+ } */
 //----------------------------------Auto reply to torvic-----------------------------------------------------------
-       if (message.author.id == ('234511563808178196') && message.channel.id ==('414962144195379220')){
+       if (message.author.id == ('234511563808178196') || message.author.id == ("596936209217880084") || message.author.id == ("320737915908915200") && message.channel.id ==('414962144195379220')){
             message.channel.sendMessage( message.author.username + 'Is a BooMER');
            message.channel.sendMessage({files: ['ifunny.jpg']});
         }
@@ -116,6 +141,11 @@ if (message.content.startsWith(prefix + "staff")){
     if (message.content.startsWith(prefix + "ifunny"))
     {
         message.channel.sendMessage({files: ['ifunny.jpg']});
+    }
+//----------------------------------------------bot says bye..---------------------------------------------
+    if (message.content.startsWith(prefix + "bye"))
+    {
+        message.reply('How dare you leave me??! I will find you, and kill you!')
     }
 //------------------------------------------Bot says hi--------------------------------------------------------
     if (message.content.startsWith(prefix + "hi"))
@@ -154,8 +184,8 @@ if (message.content.startsWith(prefix + "staff")){
                 "I bet you shower naked. YOU SLUT!",
                 "What are you? Some sort of military test gone wrong??",
                 "You are the cum shot your mother shoulda swallowed",
-                "Why tf are you doing ^insult, instead of playing retro, fuqs wrong with chu??",
-                "Just because its october does not mean you can wear your furry suit outside!",
+                "Your a IQ of 3 kinda person",
+                //"Just because its october does not mean you can wear your furry suit outside!",
                 "You block head lookin ass",
                 "Ima be real with chu chief. I just plain out dont like you",
                 "Whos a little brit across the sea? YOU ARE",
@@ -166,7 +196,7 @@ if (message.content.startsWith(prefix + "staff")){
                 ]
        
                 var insult = insults[ Math.floor(Math.random() * insults.length) ];
-        message.reply(insult);
+        message.channel.sendMessage(insult);
     }
 //----------------------------------------------ask the magic 8 ball------------------------------------------------
     if (message.content.startsWith(prefix + "magic"))
@@ -194,21 +224,17 @@ if (message.content.startsWith(prefix + "staff")){
     ]
 
     var magic = magics[ Math.floor(Math.random() * magics.length) ];
-    message.reply(magic);
+    message.channel.sendMessage(magic);
     }
 //----------------------------------------------When you get bored--------------------------------------------------
     if (message.content.startsWith(prefix + "bored"))
     {
-        number = 3; 
-        var random = Math.floor(Math.random() * (number -1 + 1)) +1;
-        switch(random){ 
-            case 1:  message.channel.sendMessage('Watch this video! https://www.youtube.com/watch?v=cTdOJUNCFFQ'); 
-            break;
-            case 2: message,channel.sendMessage('BORED?? Just join the Retro Minecraft server, that will cure your boredom');
-            break;
-            case 3: message.channel.sendMessage('Watch this video about Minecraft! DO IT!!! https://www.youtube.com/watch?v=Agc4YLmxT88');
-            break;
-        }
+        var bored = ['Watch this video! https://www.youtube.com/watch?v=cTdOJUNCFFQ',
+        'BORED?? Just join the Retro Minecraft server, that will cure your boredom',
+        'Watch this video about Minecraft! DO IT!!! https://www.youtube.com/watch?v=Agc4YLmxT88'
+    ]
+        var bore = bored[ Math.floor(Math.random() * bored.length)];
+        message.channel.sendMessage(bore);
     }
 //-----------------------------------------Russian roullete--------------------------------------------------------
     if (message.content.startsWith(prefix + "russian"))
@@ -267,6 +293,51 @@ if (message.content.startsWith(prefix + "ban")){
                            // });
         message.channel.sendMessage('Alright time to hit that ban hammer', {files: ["ban.jpg"] });
 } 
+
+//-------------------------------------------Machine gun gif----------------------------------------------------
+
+if (message.content.startsWith(prefix + "machine")){
+    
+message.channel.sendMessage('Ratatatattaattaatatatatatatattaatatatatatata', {files: ["machine.gif"] });
+} 
+
+//-------------------------------Air support gif-----------------------------------------
+if (message.content.startsWith(prefix + "air")){
+    message.reply('Danger Close', {files: ["ac.gif"] });
+} 
+
+//-----------------------------------------house explosion gif------------------------------------
+if (message.content.startsWith(prefix + "boom")){
+    
+message.channel.sendMessage('Target is K.I.A.', {files: ["boom.gif"] });
+} 
+
+//-------------------------------------------Me art----------------------------------------------------------
+if (message.content.startsWith(prefix + "art")){ 
+    message.channel.sendMessage('me art tho', {files: ["art.jpg"] });
+    } 
+//-----------------------------------for testing----------------------------
+    if (message.content.startsWith(prefix + "luna")){ 
+        message.channel.sendMessage('How could YOU??', {files: ["luna2.mp4"] });
+        } 
+
+//--------------------------------------------yobamos for chknpi-----------------------
+if (message.content.startsWith(prefix + "yobamos") && message.author.id == ('467654269311647744')){ 
+    message.channel.sendMessage('OMG its Yobamos!', {files: ["yobamos.jpg"] });
+    } 
+
+    if (message.content.startsWith(prefix + "yobamos") && message.author.id == ('257723194331496448')){ 
+        message.channel.sendMessage('OMG its Yobamos!', {files: ["yobamos.jpg"] });
+        } 
+
+//---------------------------------------------------------------------------------------------------------------
+if (message.content.startsWith(prefix + "info")){
+    message.channel.sendMessage('I am a discord bot, programmed to do various things for your entertainment')
+}
+//----------------------------------------------------------------------------------------------------------
+if (message.content.startsWith(prefix + "creator")){
+    message.channel.sendMessage('I was created, and programmed by Gangster')
+}
 //-----------------------------------------------------------------------------------------------------------------
 // secret,jun(ect secret cmds)
 //----------------------------------------------------------------------------------------------------------------
