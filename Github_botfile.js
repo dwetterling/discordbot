@@ -127,10 +127,10 @@ if (message.content.startsWith(prefix + "food"))
         message.channel.sendMessage('Pong');
     }
 //-----------------------------------------To shame luna when she forgets-------------------------------------------
-    if (message.content.startsWith(prefix + "shame"))
-    {
-        message.channel.sendMessage('You forgot to do something', {files: ["shame.jpg"] });
-    }
+    // if (message.content.startsWith(prefix + "shame"))
+    // {
+    //     message.channel.sendMessage('You forgot to do something', {files: ["shame.jpg"] });
+    // }
 //---------------------------------------Show player current level and XP------------------------------------------
     if (message.content.startsWith(prefix + "stats")){
         message.reply(' is level ' + userStats.level)
@@ -316,7 +316,7 @@ message.channel.sendMessage('Target is K.I.A.', {files: ["boom.gif"] });
 if (message.content.startsWith(prefix + "art")){ 
     message.channel.sendMessage('me art tho', {files: ["art.jpg"] });
     } 
-//-----------------------------------for testing----------------------------
+//-----------------------------------to shame luna----------------------------
     if (message.content.startsWith(prefix + "luna")){ 
         message.channel.sendMessage('How could YOU??', {files: ["luna2.mp4"] });
         } 
@@ -330,11 +330,11 @@ if (message.content.startsWith(prefix + "yobamos") && message.author.id == ('467
         message.channel.sendMessage('OMG its Yobamos!', {files: ["yobamos.jpg"] });
         } 
 
-//---------------------------------------------------------------------------------------------------------------
+//------------------------------------------brief description--------------------------------------------------------------
 if (message.content.startsWith(prefix + "info")){
     message.channel.sendMessage('I am a discord bot, programmed to do various things for your entertainment')
 }
-//----------------------------------------------------------------------------------------------------------
+//----------------------------------------------says who made bot-------------------------------------------------------
 if (message.content.startsWith(prefix + "creator")){
     message.channel.sendMessage('I was created, and programmed by Gangster')
 }
