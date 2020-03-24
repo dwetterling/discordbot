@@ -16,12 +16,13 @@ var bot = new discord.Client({
    autorun: true
 });
 
+
 bot.on('ready', function (evt) {
     
     logger.info('Connected');
     logger.info('Logged in as: ');
     logger.info(bot.username);
-    bot.user.setActivity('Chicken Tendies');
+    bot.user.setActivity('Shoot the Hacker');
     
 });
 
@@ -35,10 +36,14 @@ if(fs.existsSync('stats.json')){
 }
 
 bot.on('message', (message) => {
+    if(message.author.id == bot.user.id)
+return;
+    message == message.content.toLowerCase(message);
 //------------------------------------------------------------------------------------------------------
 //Player levels
-if(message.author.id == bot.user.id)
-return;
+
+
+msg = message.content.toLowerCase();
 
     if (message.guild.id in stats === false){
         stats[message.guild.id] = {};
@@ -74,18 +79,46 @@ return;
     }
 
 //-------------------------------------------Shows list of commands--------------------------------------------------
- if (message.content.startsWith(prefix + "help"))
+ if (msg.startsWith(prefix + "help"))
 {    
-        message.reply(' Try these keywords after' + ' ' +  '^' + ' ' +  '(stats,ping,ifunny,hi,winux,insult,magic,bored,russian,tendies,noods,count,food,air,machine,boom)');
-        
-        }
+    var botCommands = new discord.RichEmbed()
+    .setTitle("How to use the Chicken Tendies bot")
+    .setThumbnail(message.author.avatarURL)
+    .addField("Command usage","Use the ^ icon before these words to use that command")
+    .addField("stats", "Display's your stats on Retro")
+    .addField("ping", "Replies pong")
+    .addField("ifunny", "Sends ifunny watermark")
+    .addField("hi", "Sends a lovely picture of a doggo")
+    .addField("insult", "Insults you")
+    .addField("magic", "Acts like a magic 8 ball")
+    .addField("bored", "Suggests something to do if bored")
+    .addField("russian", "let's you play a deadly game")
+    .addField("tendies", "Supplies a link for the tendies song")
+    .addField("winux", "Make fun of Linux")
+    .addField("food", "Gives a food item for you to eat")
+    .addField("air", "Calls in air support")
+    .addField("machine", "Pulls out a machine gun")
+    .addField("boom", "Blows up a house")
+    .addField("say", "Will say anything you tell it to")
+    .addField("weewoo", "Sends the police")
+    .addField("gunturtle", "The turtle will have its revenge")
+    .addField("vibecheck", "Prepares to check ye vibe")
+    .addField("vibes", "Tells you what your vibe is")
+    .setColor(0x0000FF)
+    .setFooter("Hope you have fun with these commands")
+
+    message.channel.sendEmbed(botCommands);
+}
+       
 //-------------------------------------Secert commands for staff----------------------------------------------------
-if (message.content.startsWith(prefix + "staff")){
-    message.reply('Try these hidden keywords after' + ' ' + '^' + ' ' + '(shame,ban)')
+if (msg.startsWith(prefix + "staff")){
+    message.delete();
+    message.reply('Try these hidden keywords after' + ' ' + '^' + ' ' + '(ban,luna,spam)')
 }
 
 if (message.content.startsWith(prefix + "food"))
 {
+    
     var food =['chicken tendies',
         'pasta',
         'salad',
@@ -106,50 +139,37 @@ if (message.content.startsWith(prefix + "food"))
 
 }
 //---------------------------------------------------------------------------------------------------------------
- /* if (message.content.startsWith(prefix + "say"))
- {
-     message.channel.sendMessage(message.content.;
- } */
-//----------------------------------Auto reply to torvic-----------------------------------------------------------
-       if (message.author.id == ('234511563808178196') || message.author.id == ("596936209217880084") || message.author.id == ("320737915908915200") && message.channel.id ==('414962144195379220')){
-            message.channel.sendMessage( message.author.username + 'Is a BooMER');
-           message.channel.sendMessage({files: ['ifunny.jpg']});
-        }
-
-//--------------------------------------Auto reply to Chknpi--------------------------------------------------------
-       /*  if (message.author.id == ('467654269311647744') && message.channel.id ==('414962144195379220'))
-        {
-           message.channel.sendMessage( message.author.username + 'Is a BooMER');
-        } */
+ 
 //--------------------------------------------To test bot working---------------------------------------------------
-    if (message.content.startsWith(prefix + "ping"))
+    if (msg.startsWith(prefix + "ping"))
     {
+        message.delete();
         message.channel.sendMessage('Pong');
     }
 //-----------------------------------------To shame luna when she forgets-------------------------------------------
-    // if (message.content.startsWith(prefix + "shame"))
-    // {
-    //     message.channel.sendMessage('You forgot to do something', {files: ["shame.jpg"] });
-    // }
 //---------------------------------------Show player current level and XP------------------------------------------
-    if (message.content.startsWith(prefix + "stats")){
+    if (msg.includes(prefix + "stats")){
+        message.delete();
         message.reply(' is level ' + userStats.level)
         message.channel.sendMessage(' and has ' + userStats.xp + ' xp')
         message.channel.sendMessage(xpToNextLevel + 'xp Is needed for the next level.')
     }
 //-------------------------------------------ifunny tag----------------------------------------------------------
-    if (message.content.startsWith(prefix + "ifunny"))
+    if (msg.startsWith(prefix + "ifunny"))
     {
+        message.delete();
         message.channel.sendMessage({files: ['ifunny.jpg']});
     }
 //----------------------------------------------bot says bye..---------------------------------------------
-    if (message.content.startsWith(prefix + "bye"))
+    if (msg.startsWith(prefix + "bye"))
     {
+        message.delete();
         message.reply('How dare you leave me??! I will find you, and kill you!')
     }
 //------------------------------------------Bot says hi--------------------------------------------------------
-    if (message.content.startsWith(prefix + "hi"))
+    if (msg.startsWith(prefix + "hi"))
     {
+        message.delete();
         number = 6; 
                       var random = Math.floor(Math.random() * (number -1 + 1)) +1;
                       switch(random){         
@@ -168,12 +188,13 @@ if (message.content.startsWith(prefix + "food"))
                     }
     }
 //--------------------------------------Sorry not sorry linux------------------------------------------------------
-    if (message.content.startsWith(prefix + "winux"))
+    if (msg.startsWith(prefix + "winux"))
     {
+        message.delete();
             message.channel.sendMessage( "<@" + 196480010637279232 +  ">" + ' ' + 'BOK', {files: ['winux.jpg']});
     }
 //--------------------------------------------Gotta insult people---------------------------------------------------
-    if (message.content.startsWith(prefix + "insult"))
+    if (msg.startsWith(prefix + "insult"))
     {
         var insults = [ "Your bad kid",
                 "Your a pee pee poo poo pants",
@@ -192,14 +213,15 @@ if (message.content.startsWith(prefix + "food"))
                 "Watch out! I heard the US army was gonna invade your body, because you use so much essential oil shit.",
                 "You are smooth brained",
                 "You use small brain time",
-                "You fall for all them fake reward virus/scam sites"
+                "You fall for all them fake reward virus/scam sites",
+                "You are a dodo bird"
                 ]
        
                 var insult = insults[ Math.floor(Math.random() * insults.length) ];
         message.channel.sendMessage(insult);
     }
 //----------------------------------------------ask the magic 8 ball------------------------------------------------
-    if (message.content.startsWith(prefix + "magic"))
+    if (msg.startsWith(prefix + "magic"))
     { 
         var magics = ['It is certain',
         'It is decidedly so',
@@ -227,8 +249,9 @@ if (message.content.startsWith(prefix + "food"))
     message.channel.sendMessage(magic);
     }
 //----------------------------------------------When you get bored--------------------------------------------------
-    if (message.content.startsWith(prefix + "bored"))
+    if (msg.startsWith(prefix + "bored"))
     {
+        message.delete();
         var bored = ['Watch this video! https://www.youtube.com/watch?v=cTdOJUNCFFQ',
         'BORED?? Just join the Retro Minecraft server, that will cure your boredom',
         'Watch this video about Minecraft! DO IT!!! https://www.youtube.com/watch?v=Agc4YLmxT88'
@@ -237,8 +260,9 @@ if (message.content.startsWith(prefix + "food"))
         message.channel.sendMessage(bore);
     }
 //-----------------------------------------Russian roullete--------------------------------------------------------
-    if (message.content.startsWith(prefix + "russian"))
+    if (msg.startsWith(prefix + "russian"))
     {
+        message.delete();
         number = 6; 
                         var random = Math.floor(Math.random() * (number -1 + 1)) +1;
                         switch(random){         
@@ -257,13 +281,15 @@ if (message.content.startsWith(prefix + "food"))
          }
     }
 //-----------------------------------------------Chicken tendies song------------------------------------------------
-    if (message.content.startsWith(prefix + "tendies"))
+    if (msg.startsWith(prefix + "tendies"))
     {
+        message.delete();
         message.channel.sendMessage('https://www.youtube.com/watch?v=HbvXwJU6BbE')
     }
 //--------------------------------------------Just some family friendly noods---------------------------------------
-    if (message.content.startsWith(prefix + "noods"))
+    if (msg.startsWith(prefix + "noods"))
     {
+        message.delete();
         number = 5; 
         var random = Math.floor(Math.random() * (number -1 + 1)) +1;
         switch(random){    
@@ -280,14 +306,16 @@ if (message.content.startsWith(prefix + "food"))
         }
     }
 //----------------------------------------------A edited Count song----------------------------------------------
-    if (message.content.startsWith(prefix + "count"))
+    if (msg.startsWith(prefix + "count"))
     {
+        message.delete();
         message.channel.sendMessage('https://www.youtube.com/watch?v=6AXPnH0C9UA&t=36s');
     }
 //---------------------------------------------------------------------------------------------------------------
             
 //-------------------------------------------The fake ban----------------------------------------------------------
-if (message.content.startsWith(prefix + "ban")){
+if (msg.startsWith(prefix + "ban")){
+    message.delete();
                             //bot.kick ({
                                // userID: '234511563808178196'
                            // });
@@ -296,48 +324,241 @@ if (message.content.startsWith(prefix + "ban")){
 
 //-------------------------------------------Machine gun gif----------------------------------------------------
 
-if (message.content.startsWith(prefix + "machine")){
-    
+if (msg.startsWith(prefix + "machine")){
+    message.delete();
 message.channel.sendMessage('Ratatatattaattaatatatatatatattaatatatatatata', {files: ["machine.gif"] });
 } 
 
 //-------------------------------Air support gif-----------------------------------------
-if (message.content.startsWith(prefix + "air")){
+if (msg.startsWith(prefix + "air")){
+    message.delete();
     message.reply('Danger Close', {files: ["ac.gif"] });
 } 
 
 //-----------------------------------------house explosion gif------------------------------------
-if (message.content.startsWith(prefix + "boom")){
-    
+if (msg.startsWith(prefix + "boom")){
+    message.delete();
 message.channel.sendMessage('Target is K.I.A.', {files: ["boom.gif"] });
 } 
 
 //-------------------------------------------Me art----------------------------------------------------------
-if (message.content.startsWith(prefix + "art")){ 
+if (msg.startsWith(prefix + "art")){ 
+    message.delete();
     message.channel.sendMessage('me art tho', {files: ["art.jpg"] });
     } 
 //-----------------------------------to shame luna----------------------------
-    if (message.content.startsWith(prefix + "luna")){ 
+    if (msg.startsWith(prefix + "luna")){ 
+        message.delete();
         message.channel.sendMessage('How could YOU??', {files: ["luna2.mp4"] });
         } 
 
 //--------------------------------------------yobamos for chknpi-----------------------
-if (message.content.startsWith(prefix + "yobamos") && message.author.id == ('467654269311647744')){ 
+if (msg.startsWith(prefix + "yobamos") && message.author.id == ('467654269311647744')){ 
+    message.delete();
     message.channel.sendMessage('OMG its Yobamos!', {files: ["yobamos.jpg"] });
     } 
 
-    if (message.content.startsWith(prefix + "yobamos") && message.author.id == ('257723194331496448')){ 
+    if (msg.startsWith(prefix + "yobamos") && message.author.id == ('257723194331496448')){ 
+        message.delete();
         message.channel.sendMessage('OMG its Yobamos!', {files: ["yobamos.jpg"] });
         } 
 
-//------------------------------------------brief description--------------------------------------------------------------
-if (message.content.startsWith(prefix + "info")){
+//-------------------------------------------brief description------------------------------------------------------
+if (msg.startsWith(prefix + "info")){
+    message.delete();
     message.channel.sendMessage('I am a discord bot, programmed to do various things for your entertainment')
 }
-//----------------------------------------------says who made bot-------------------------------------------------------
-if (message.content.startsWith(prefix + "creator")){
+//---------------------------------------------says who made bot-----------------------------------------------------
+if (msg.startsWith(prefix + "creator")){
+    message.delete();
     message.channel.sendMessage('I was created, and programmed by Gangster')
 }
+//--------------------------------------------------------------------------------------------------------------
+if (msg.startsWith(prefix + "trickery")){
+
+}
+//--------------------------------------------VIBE check!-----------------------------------------
+if (msg.startsWith(prefix + "vibecheck")){
+    
+   
+    message.channel.sendMessage('Now checking their vibes', {files: ["vibe.jpg"] });
+
+    
+}
+
+
+ 
+if (msg.startsWith(prefix + "vibes")){
+
+    var vibes = ['Good',
+    'EVIL'
+    ]
+
+    var vibe = vibes[ Math.floor(Math.random() * vibes.length) ];
+    message.channel.sendMessage('They have a' + ' ' + vibe +' ' + 'vibe');
+} 
+
+
+//--------------------------------------------------WEEWOOO----------------------
+if (msg.startsWith(prefix + "weewoo")){
+    message.delete();
+    message.channel.sendMessage('Police are on route', {files: ["WeeWoo.jpg"] });
+}
+//------------------------------------SPC 1048-------------------------------------
+
+//-----------------------------------------SPAM (staff only access)-----------------------------------------
+if (msg.startsWith(prefix + "spam") && message.author.id ==('257723194331496448')){
+    i = 0;
+    while(i < 10){
+        message.channel.send (message.content.slice(5, message.content.length));
+        i++;
+    }
+}
+
+if (msg.startsWith(prefix + "spam") && message.author.id ==('196480010637279232')){
+    i = 0;
+    while(i < 50){
+        message.channel.send (message.content.slice(5, message.content.length));
+        
+    
+    }
+}
+
+if (msg.startsWith(prefix + "spam") && message.author.id ==('203612528066953216')){
+    i = 0;
+    while(i < 50){
+        message.channel.send (message.content.slice(5, message.content.length));
+        i++;
+    }
+}
+
+
+//------------------------------------Say--------------------
+if (msg.startsWith(prefix + "say"))
+{
+    if (message.author.id == ('241427366549651467')){
+        message.channel.send ('Sorry Jun but I will not allow you to tell me what to say')
+        return;
+    }
+
+    
+    if (message.author.id == ('270045200771055616')){
+        message.channel.send ('Sorry Destiny, But i am under orders to not say anything you tell me to')
+        return;
+    }
+
+    if (message.author.id == ('342128038047383561')){
+        message.channel.send ('Why do you try and use me to say things N256')
+        return;
+    }
+
+    if (message.author.id == ('467654269311647744')){
+        message.channel.send ('Chknpi stop dming me your nudes')
+        return;
+    }
+
+    if (message.author.id == ('527212357282299922')){
+        message.reply ('Shutup you wEeD SmOkER')
+        return;
+    }
+
+    if (message.author.id == ('561956430857633816')){
+        message.reply ('I dont let hoes like you tell me what to do')
+        return;
+    }
+
+    if (message.author.id == ('629048269380648973')){
+        message.reply ('Does Brooke know you just Dmd me your nudes?')
+        return;
+    }
+    
+    if (msg.includes('nigger')){
+        message.delete();
+    }
+else {
+    
+    message.delete();
+    message.channel.send (message.content.slice(5, message.content.length));
+}
+}
+
+if (msg.includes("nigger")){
+    message.delete();
+}
+//-------------------------------------------------------------------------------------------------
+if (msg.startsWith(prefix + "gunturtle")){
+    message.delete();
+    message.channel.send('This is  for my brother who choked on a straw!', {files: ['gunturtle.jpg'] });
+}
+//------------------------------------------------------------------------------------------------
+
+//---------------------------------------Yoshi----------------------------------------------------
+if (msg.includes("jello") && msg.includes("yoshi")){
+    message.channel.sendMessage({files: ["yoshi.gif"]});
+}
+
+//-------------------------------------------------------Herobrine-----------------------------------------
+if (msg.includes("herobrine")){
+    message.channel.sendMessage({files: ["herobrine.gif"]});
+}
+
+//----------------------------------------------------------------------------------------
+if (msg.includes(prefix + "stop")){
+    message.channel.sendMessage({files: ["stop.gif"]})
+}
+//------------------------------------------------------------------
+if (msg.includes(prefix + "sin")){
+    message.channel.sendMessage({files: ["sin.jpg"]})
+}
+//-----------------------------------------------------------------
+if (msg.includes("i") && message.content.includes("like") && message.content.includes("apple")){
+    message.channel.sendMessage({files: ["apple.jpg"]});
+}
+
+if (msg.includes("trump")){
+    message.channel.sendMessage({files: ["trump.mp4"]});
+}
+
+if (message.author.id == ('662086772834041877')){
+if(msg.includes("joined the server for the first time") && (message.channel.id == ('662121167066234909'))){
+    message.channel.sendMessage("Welcome to Retro")}
+else if(msg.includes("joined the server") && (message.channel.id == ('662121167066234909'))){
+        message.channel.sendMessage("Welcome back to Retro")
+}}
+
+if (msg.includes(" hypixel")){
+    if (msg.includes("dont play on")){
+       message.reply("Damn right dont play on that ||piece of shit|| server")
+}
+   else{
+       message.reply("Dont make me ban your ||ass|| you little ||bitch||")
+   }
+}
+
+
+
+if (msg.includes("bruh")){
+    message.channel.sendMessage({files: ["bruh.mp4"]});
+}
+
+if (msg.includes(prefix + "freedom")){
+    message.channel.sendMessage({files: ["step8.mp4"]})
+}
+
+if(msg.includes("minecraft")){
+    number = 2;
+    var random = Math.floor(Math.random() * (number -1 + 1)) +1;
+    switch(random){
+    case 1: message.channel.sendMessage("Play on this lovely server!");
+    message.channel.sendMessage("https://discord.gg/RjzdQwx");
+    break;
+    case 2: message.channel.sendMessage("Watch this lovely video! https://youtu.be/P6maopA50DY  ");
+    break;
+}
+}
+
+   
+
 //-----------------------------------------------------------------------------------------------------------------
 // secret,jun(ect secret cmds)
 //----------------------------------------------------------------------------------------------------------------
