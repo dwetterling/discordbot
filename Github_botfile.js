@@ -472,9 +472,7 @@ if (msg.startsWith(prefix + "say"))
         return;
     }
     
-    if (msg.includes('nigger')){
-        message.delete();
-    }
+    
 else {
     
     message.delete();
@@ -482,9 +480,7 @@ else {
 }
 }
 
-if (msg.includes("nigger")){
-    message.delete();
-}
+
 //-------------------------------------------------------------------------------------------------
 if (msg.startsWith(prefix + "gunturtle")){
     message.delete();
